@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: movie-api-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: movie-category-service
+          uri: lb://movie-category-service
+          predicates:
+            - Path=/movie/**
+        - id: movie-info-service
+          uri: lb://movie-info-service
+          predicates:
+            - Path=/movie/list/**, /movie/rating/**
+        - id: rating-data-service
+          uri: lb://rating-date-service
+          predicates:
+              - Path=/rating/**
+
+server:
+  port: 8080
+
+
